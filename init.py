@@ -6,7 +6,7 @@ def urlencode(data):
 
 
 headers = {"Content-Type": "application/json"}
-data = "{
+data = """{
     \"index_pattern\": \"kheopsmetrics-*\",
     \"rollup_index\": \"rollup_job_kheopsmetrics\",
     \"cron\": \"34 14 * * * ?\",
@@ -174,7 +174,7 @@ data = "{
     ],
     \"timeout\": \"20s\",
     \"page_size\": 1000
-}"
+}"""
 response = requests.post("http://elasticsearch:9200/_rollup/job/rollup_job_kheops_metrics222", headers=headers, data=urlencode(data))
 print(response.status_code)
 
