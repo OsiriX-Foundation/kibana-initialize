@@ -21,3 +21,10 @@ if response.status_code == 404:
 else:
     print("rollup_job_kheops_metrics already exist and already started")
 
+
+    
+headers = {"kbn-xsrf": "true"}
+files = {'file': open('export (8).ndjson', 'rb')}
+response = requests.post("http://kibana:9200/api/saved_objects/_import" ,files=files)
+print(response.status_code)
+print(response.content) 
