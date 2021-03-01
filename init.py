@@ -1,5 +1,9 @@
 import requests
 import urllib
+import time
+
+
+time.sleep(3 * 60)
 
 print("Create and start rollup_job_kheops_metrics")
 response = requests.post("http://elasticsearch:9200/_rollup/job/rollup_job_kheops_metrics/_start")
