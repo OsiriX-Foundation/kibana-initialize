@@ -1,9 +1,6 @@
 import requests
 import urllib
 
-def urlencode(data):
-    return urllib.parse.urlencode(data)
-
 print("Create and start rollup_job_kheops_metrics")
 response = requests.post("http://elasticsearch:9200/_rollup/job/rollup_job_kheops_metrics/_start")
 if response.status_code == 404:
