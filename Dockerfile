@@ -5,5 +5,6 @@ RUN pip3 install requests && \
 
 ADD init.py init.py
 ADD rollup_job_kheops_metrics.json rollup_job_kheops_metrics.json
+ADD export.ndjson export.ndjson
 
 ENTRYPOINT ["python3", "init.py"]
