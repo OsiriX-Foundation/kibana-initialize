@@ -25,6 +25,6 @@ else:
     
 headers = {"kbn-xsrf": "true"}
 files = {'file': open('export.ndjson', 'rb')}
-response = requests.post("http://kibana/api/saved_objects/_import" ,files=files)
+response = requests.post("http://kibana:5601/api/saved_objects/_import" ,files=files)
 print(response.status_code)
 print(response.content) 
