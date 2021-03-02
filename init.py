@@ -33,4 +33,4 @@ print(response.status_code)
 print(response.content) 
 
 
-pritn("End of the script")
+print("End of the script")
