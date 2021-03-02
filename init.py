@@ -2,8 +2,9 @@ import requests
 import urllib
 import time
 
-
+print("waiting 3 min before executing the script")
 time.sleep(3 * 60)
+print("start script")
 
 print("Create and start rollup_job_kheops_metrics")
 response = requests.post("http://elasticsearch:9200/_rollup/job/rollup_job_kheops_metrics/_start")
@@ -30,3 +31,6 @@ files = {'file': open('export.ndjson', 'rb')}
 response = requests.post("http://kibana:5601/api/saved_objects/_import", params=params, files=files, headers=headers)
 print(response.status_code)
 print(response.content) 
+
+
+pritn("End of the script")
