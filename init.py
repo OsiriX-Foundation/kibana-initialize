@@ -1,6 +1,9 @@
 import requests
 import urllib
 import time
+import functools
+
+print = functools.partial(print, flush=True)
 
 #print("waiting 3 min before executing the script")
 #time.sleep(3 * 60)
