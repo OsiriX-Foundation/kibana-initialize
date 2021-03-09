@@ -13,9 +13,10 @@ while True:
         if response.status_code == 200:
             break
         else:
-            time.sleep(30)
+            time.sleep(10)
     except:
-        time.sleep(30)
+        time.sleep(10)
+        print("exception")
 
 
 print("Create and start rollup_job_kheops_metrics")
