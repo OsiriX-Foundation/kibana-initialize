@@ -7,11 +7,15 @@ import time
 #print("start script")
 
 while True:
-    time.sleep(30)
-    response = requests.get("http://elasticsearch:9200/_cluster/health?wait_for_status=yellow&timeout=10s")
-    print(response.status_code)
-    if response.status_code == 200:
-        break
+    try:
+        response = requests.get("http://elasticsearch:9200/_cluster/health?wait_for_status=yellow&timeout=10s")
+        print(response.status_code)
+        if response.status_code == 200:
+            break
+        else:
+            time.sleep(30)
+    except ConnectionError:
+        time.sleep(30)
 
 
 print("Create and start rollup_job_kheops_metrics")
