@@ -7,11 +7,10 @@ import time
 #print("start script")
 
 while True:
+    time.sleep(30)
     response = requests.get("http://elasticsearch:9200/_cluster/health?wait_for_status=yellow&timeout=10s")
     print(response.status_code)
-    if response.status_code != 200:
-        time.sleep(10)
-    else:
+    if response.status_code == 200:
         break
 
 
