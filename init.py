@@ -20,6 +20,24 @@ while True:
     except:
         time.sleep(10)
         print("exception!")
+   
+print("import kinana saved objects")
+
+while True:
+    try:
+        headers = {"kbn-xsrf": "true"}
+        params={'overwrite': 'true'}
+        files = {'file': open('export.ndjson', 'rb')}
+        response = requests.post("http://kibana:5601/api/saved_objects/_import", params=params, files=files, headers=headers)
+        print(response.status_code)
+        print(response.content) 
+        if response.status_code == 200:
+            break
+        else:
+            time.sleep(10)
+    except:
+        time.sleep(10)
+        print("exception!")
 
 
 print("Create and start rollup_job_kheops_metrics")
@@ -47,26 +65,6 @@ if response.status_code == 404:
 else:
     print("rollup_job_kheops_metrics already exist and already started")
 
-
-    
-print("import kinana saved objects")
-
-while True:
-    try:
-        headers = {"kbn-xsrf": "true"}
-        params={'overwrite': 'true'}
-        files = {'file': open('export.ndjson', 'rb')}
-        response = requests.post("http://kibana:5601/api/saved_objects/_import", params=params, files=files, headers=headers)
-        print(response.status_code)
-        print(response.content) 
-        if response.status_code == 200:
-            break
-        else:
-            time.sleep(10)
-    except:
-        time.sleep(10)
-        print("exception!")
-
-
+        
 print("End of the script")
 
