@@ -41,12 +41,12 @@ else:
 
     
 print("import kinana saved objects")
-headers = {"kbn-xsrf": "true"}
-params={'overwrite': 'true'}
-files = {'file': open('export.ndjson', 'rb')}
 
 while True:
     try:
+        headers = {"kbn-xsrf": "true"}
+        params={'overwrite': 'true'}
+        files = {'file': open('export.ndjson', 'rb')}
         response = requests.post("http://kibana:5601/api/saved_objects/_import", params=params, files=files, headers=headers)
         print(response.status_code)
         print(response.content) 
