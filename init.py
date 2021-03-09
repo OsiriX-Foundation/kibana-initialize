@@ -16,7 +16,7 @@ while True:
             time.sleep(10)
     except:
         time.sleep(10)
-        print("exception")
+        print("exception!")
 
 
 print("Create and start rollup_job_kheops_metrics")
