@@ -33,6 +33,8 @@ if response.status_code == 404:
         if response.status_code == 200:
             print("Create")
             break
+        else:
+            time.sleep(10)
     while True:
         response = requests.post("http://elasticsearch:9200/_rollup/job/rollup_job_kheops_metrics/_start")
         print(response.status_code)
@@ -40,6 +42,8 @@ if response.status_code == 404:
         if response.status_code == 200:
             print("Start")
             break
+        else:
+            time.sleep(10)
 else:
     print("rollup_job_kheops_metrics already exist and already started")
 
