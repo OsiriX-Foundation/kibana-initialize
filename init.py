@@ -14,7 +14,7 @@ while True:
             break
         else:
             time.sleep(30)
-    except ConnectionError:
+    except:
         time.sleep(30)
 
 
