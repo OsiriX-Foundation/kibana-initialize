@@ -43,13 +43,17 @@ params={'overwrite': 'true'}
 files = {'file': open('export.ndjson', 'rb')}
 
 while True:
-    response = requests.post("http://kibana:5601/api/saved_objects/_import", params=params, files=files, headers=headers)
-    print(response.status_code)
-    print(response.content) 
-    if response.status_code == 200:
-        break
-    else:
-        time.sleep(30)
+    try:
+        response = requests.post("http://kibana:5601/api/saved_objects/_import", params=params, files=files, headers=headers)
+        print(response.status_code)
+        print(response.content) 
+        if response.status_code == 200:
+            break
+        else:
+            time.sleep(10)
+    except:
+        time.sleep(10)
+        print("exception!")
 
 
 print("End of the script")
