@@ -26,11 +26,11 @@ while True:
    
 print("import kinana saved objects")
 
-headers = {"kbn-xsrf": "true"}
-params={'overwrite': 'true'}
-files = {'file': open('export.ndjson', 'rb')}
 while True:
     try:
+        headers = {"kbn-xsrf": "true"}
+        params={'overwrite': 'true'}
+        files = {'file': open('export.ndjson', 'rb')}
         response = requests.post("http://kibana:5601/api/saved_objects/_import", params=params, files=files, headers=headers)
         print(response.status_code)
         print(response.content) 
@@ -52,8 +52,9 @@ while True:
 print("Create and start rollup_job_kheops_metrics")
 response = requests.post("http://elasticsearch:9200/_rollup/job/rollup_job_kheops_metrics/_start")
 if response.status_code == 404:
-    headers = {"Content-Type": "application/json"}
+   
     while True:
+        headers = {"Content-Type": "application/json"}
         response = requests.put("http://elasticsearch:9200/_rollup/job/rollup_job_kheops_metrics", headers=headers, data=open("rollup_job_kheops_metrics.json", "rb"))
         print(response.status_code)
         print(response.content)
