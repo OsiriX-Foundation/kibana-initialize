@@ -2,6 +2,7 @@ import requests
 import urllib
 import time
 import functools
+import json
 
 print = functools.partial(print, flush=True)
 
@@ -34,7 +35,11 @@ while True:
         print(response.status_code)
         print(response.content) 
         if response.status_code == 200:
-            break
+            json_object = json.load(response.content)
+            if json_object["successCount"] != 0
+                break
+            else:
+                time.sleep(10)
         else:
             time.sleep(10)
     except:
