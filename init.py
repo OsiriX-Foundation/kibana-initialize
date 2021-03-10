@@ -14,7 +14,7 @@ while True:
     try:
         params={'wait_for_status': 'yellow', 'timeout': '30s'}
         response = requests.get("http://elasticsearch:9200/_cluster/health")
-        print(response.status_code)
+        print(str(response.status_code) + "      " + str(response.content)) 
         if response.status_code == 200:
             print("Elasticsearch is ready")
             break
