@@ -35,10 +35,12 @@ while True:
         print(response.status_code)
         print(response.content) 
         if response.status_code == 200:
-            json_object = json.load(response.content)
+            json_object = json.loads(response.content)
             if json_object.get("successCount") != 0:
+                print("pas 0")
                 break
             else:
+                print("0")
                 time.sleep(10)
         else:
             time.sleep(10)
