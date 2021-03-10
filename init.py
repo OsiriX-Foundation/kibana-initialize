@@ -11,23 +11,24 @@ print = functools.partial(print, flush=True)
 
 while True:
     try:
-        response = requests.get("http://elasticsearch:9200/_cluster/health?wait_for_status=yellow&timeout=10s")
+        response = requests.get("http://elasticsearch:9200/_cluster/health?wait_for_status=yellow&timeout=30s")
         print(response.status_code)
         if response.status_code == 200:
             break
         else:
             time.sleep(10)
     except:
+        print("Elasticsearch is not ready yet")
         time.sleep(10)
-        print("exception!")
+
    
 print("import kinana saved objects")
 
+headers = {"kbn-xsrf": "true"}
+params={'overwrite': 'true'}
+files = {'file': open('export.ndjson', 'rb')}
 while True:
     try:
-        headers = {"kbn-xsrf": "true"}
-        params={'overwrite': 'true'}
-        files = {'file': open('export.ndjson', 'rb')}
         response = requests.post("http://kibana:5601/api/saved_objects/_import", params=params, files=files, headers=headers)
         print(response.status_code)
         print(response.content) 
@@ -36,15 +37,15 @@ while True:
         else:
             time.sleep(10)
     except:
+        print("Kibana is not ready yet")
         time.sleep(10)
-        print("exception!")
 
 
 print("Create and start rollup_job_kheops_metrics")
 response = requests.post("http://elasticsearch:9200/_rollup/job/rollup_job_kheops_metrics/_start")
 if response.status_code == 404:
+    headers = {"Content-Type": "application/json"}
     while True:
-        headers = {"Content-Type": "application/json"}
         response = requests.put("http://elasticsearch:9200/_rollup/job/rollup_job_kheops_metrics", headers=headers, data=open("rollup_job_kheops_metrics.json", "rb"))
         print(response.status_code)
         print(response.content)
@@ -67,4 +68,3 @@ else:
 
         
 print("End of the script")
-
