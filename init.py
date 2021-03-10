@@ -6,10 +6,6 @@ import json
 
 print = functools.partial(print, flush=True)
 
-#print("waiting 3 min before executing the script")
-#time.sleep(3 * 60)
-#print("start script")
-
 while True:
     try:
         params={'wait_for_status': 'yellow', 'timeout': '30s'}
@@ -25,7 +21,7 @@ while True:
         time.sleep(10)
 
    
-print("import kinana saved objects")
+print("Import kinana saved objects")
 
 while True:
     try:
@@ -57,21 +53,21 @@ if response.status_code == 404:
         print(response.status_code)
         print(response.content)
         if response.status_code == 200:
-            print("Create")
+            print("rollup_job_kheops_metrics created")
             break
         else:
             time.sleep(10)
+   
     while True:
         response = requests.post("http://elasticsearch:9200/_rollup/job/rollup_job_kheops_metrics/_start")
         print(response.status_code)
         print(response.content)
         if response.status_code == 200:
-            print("Start")
+            print("rollup_job_kheops_metrics started")
             break
         else:
             time.sleep(10)
 else:
     print("rollup_job_kheops_metrics already exist and already started")
-
         
 print("End of the script")
