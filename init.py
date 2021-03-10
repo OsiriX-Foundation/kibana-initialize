@@ -12,7 +12,8 @@ print = functools.partial(print, flush=True)
 
 while True:
     try:
-        response = requests.get("http://elasticsearch:9200/_cluster/health?wait_for_status=yellow&timeout=30s")
+        params={'wait_for_status': 'yellow', 'timeout': '30s'}
+        response = requests.get("http://elasticsearch:9200/_cluster/health")
         print(response.status_code)
         if response.status_code == 200:
             print("Elasticsearch is ready")
@@ -32,15 +33,12 @@ while True:
         params={'overwrite': 'true'}
         files = {'file': open('export.ndjson', 'rb')}
         response = requests.post("http://kibana:5601/api/saved_objects/_import", params=params, files=files, headers=headers)
-        print(response.status_code)
-        print(response.content) 
+        print(str(response.status_code) + "      " + str(response.content)) 
         if response.status_code == 200:
             json_object = json.loads(response.content)
             if json_object.get("successCount") != 0:
-                print("pas 0")
                 break
             else:
-                print("0")
                 time.sleep(10)
         else:
             time.sleep(10)
