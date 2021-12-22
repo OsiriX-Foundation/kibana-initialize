@@ -22,7 +22,6 @@ if response.status_code == 404:
 else:
     print("rollup_job_kheops_metrics already exist and already started")
 
-
     
 print("import kinana saved objects")
 headers = {"kbn-xsrf": "true"}
