@@ -20,7 +20,7 @@ while True:
         print("Elasticsearch is not ready yet")
         time.sleep(10)
 
-   
+
 print("Import kinana saved objects")
 
 while True:
@@ -41,7 +41,6 @@ while True:
     except:
         print("Kibana is not ready yet")
         time.sleep(10)
-
 
 print("Create and start rollup_job_kheops_metrics")
 response = requests.post("http://elasticsearch:9200/_rollup/job/rollup_job_kheops_metrics/_start")
